@@ -2,7 +2,7 @@
 
 ## Installation
 
-`yarn add @magicaltrip/fixer.io`
+`yarn add @magicaltrip/fixer.io --save --exact`
 
 ## Usage
 
@@ -25,15 +25,19 @@ fixerIo
 import fetch from "node-fetch";
 import * as FixerIo from "@magicaltrip/fixer.io";
 
+const cache = FixerIO.InMemoryCache.make({
+  cacheTTLInSeconds: 8 * 60 * 60 // cache for 8 hours
+});
+
 const fixerIo = FixerIo.live({
-  apiUrl: "http://data.fixer.io/api/latest",
-  apiKey: String(process.env.FIXER_IO_API_KEY),
-  fetch: fetch,
-  cache: FixerIO.InMemoryCache.make({ cacheTTLInSeconds: 8 * 60 * 60 })
+  apiUrl: String(process.env.FIXER_IO_API_URI),
+  apiKey: String(process.env.FIXER_IO_API_KEY), // use your own env variables
+  fetch,
+  cache
 });
 
 fixerIo
-  .latest({ base: "EUR" })
+  .latest({ base: "JPY" })
   .then(console.log)
   .catch(console.error);
 ```
