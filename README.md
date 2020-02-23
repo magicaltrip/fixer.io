@@ -1,5 +1,7 @@
 # fixer.io
 
+A small typescript wrapper for https://fixer.io/.
+
 ## Installation
 
 `yarn add @magicaltrip/fixer.io --save --exact`
@@ -25,12 +27,12 @@ fixerIo
 import fetch from "node-fetch";
 import * as FixerIo from "@magicaltrip/fixer.io";
 
-const cache = FixerIO.InMemoryCache.make({
+const cache = FixerIo.InMemoryCache.make({
   cacheTTLInSeconds: 8 * 60 * 60 // cache for 8 hours
 });
 
 const fixerIo = FixerIo.live({
-  apiUrl: String(process.env.FIXER_IO_API_URI),
+  apiUrl: String(process.env.FIXER_IO_API_URI), // use your own env variables
   apiKey: String(process.env.FIXER_IO_API_KEY), // use your own env variables
   fetch,
   cache
